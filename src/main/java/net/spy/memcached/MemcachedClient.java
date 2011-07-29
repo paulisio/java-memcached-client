@@ -226,13 +226,13 @@ public class MemcachedClient extends SpyThread
 		if (config.getConfigType() == ConfigType.MEMBASE) {
 			cfb.setFailureMode(FailureMode.Retry)
 				.setProtocol(ConnectionFactoryBuilder.Protocol.BINARY)
-				.setHashAlg(HashAlgorithm.KETAMA_HASH)
+				.setHashAlg(config.getHashAlgorithm())
 				.setLocatorType(ConnectionFactoryBuilder.Locator.VBUCKET)
 				.setVBucketConfig(bucket.getConfig());
 		} else if (config.getConfigType() == ConfigType.MEMCACHE) {
 			cfb.setFailureMode(FailureMode.Retry)
 				.setProtocol(ConnectionFactoryBuilder.Protocol.BINARY)
-				.setHashAlg(HashAlgorithm.KETAMA_HASH)
+				.setHashAlg(config.getHashAlgorithm())
 				.setLocatorType(ConnectionFactoryBuilder.Locator.CONSISTENT);
 		} else {
 			throw new ConfigurationException("Bucket type not supported or JSON response unexpected");
